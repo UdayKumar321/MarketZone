@@ -15,7 +15,7 @@ function Register() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/users/register", {
+      const response = await fetch("https://marketzone-backend-production.up.railway.app/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, role }),
