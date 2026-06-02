@@ -11,7 +11,7 @@ function Products() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/products/all")
+    fetch("https://marketzone-backend-production.up.railway.app/products/all")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

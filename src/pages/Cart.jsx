@@ -59,7 +59,7 @@ function Cart() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/orders/place", {
+      const response = await fetch("https://marketzone-backend-production.up.railway.app/orders/place", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
