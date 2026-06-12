@@ -7,9 +7,59 @@
 body{
   width: 100%;
   overflow-x: hidden;
-  font-family: Arial, sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f7fb;
+  color: #1f2937;
 }
 
 #root{
   width: 100%;
+}
+
+.app-main {
+  min-height: calc(100vh - 112px);
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 60%, #0f172a 100%);
+}
+
+.hero-section .text-white-70 {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-image {
+  border-radius: 32px;
+}
+
+.feature-card,
+.product-card,
+.auth-card {
+  border-radius: 24px;
+}
+
+.hover-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+}
+
+.auth-page {
+  min-height: calc(100vh - 112px);
+}
+
+.auth-card {
+  width: min(100%, 420px);
+}
+
+.footer-link {
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  text-decoration: none;
 }

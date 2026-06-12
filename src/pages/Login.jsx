@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-dom";
+﻿import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { API_BASE } from "../config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ function Login() {
     setError("");
 
     try {
-      const response = await fetch("https://marketzone-backend-production.up.railway.app/users/login", {
+      const response = await fetch(`${API_BASE}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -26,71 +26,60 @@ function Login() {
         return;
       }
 
-      // Save token and user info
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
       localStorage.setItem("name", data.name);
 
-      // Redirect based on role
       if (data.role === "SELLER") {
         navigate("/seller/dashboard");
       } else {
         navigate("/products");
       }
-
     } catch (err) {
       setError("Something went wrong. Try again!");
     }
   };
 
   return (
-    <>
-      <Navbar />
-      <div className="container d-flex justify-content-center align-items-center vh-100">
-        <div className="card p-4 shadow" style={{ width: "400px" }}>
+    <section className="auth-page d-flex align-items-center justify-content-center py-5">
+      <div className="card shadow-sm p-4 auth-card">
+        <h2 className="text-center mb-4">Login</h2>
 
-          <h2 className="text-center mb-4">Login</h2>
+        {error && <div className="alert alert-danger">{error}</div>}
 
-          {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-            <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
+          <button className="btn btn-info w-100 mb-3">Login</button>
+        </form>
 
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-
-            <button className="btn btn-dark w-100">Login</button>
-
-          </form>
-
-          <p className="text-center mt-3">
-            Don't have an account?{" "}
-            <a href="/register" className="text-info">Register</a>
-          </p>
-
-        </div>
+        <p className="text-center text-muted mb-0">
+          Don&apos;t have an account? <Link to="/register" className="text-info">Register</Link>
+        </p>
       </div>
-    </>
+    </section>
   );
 }
 
